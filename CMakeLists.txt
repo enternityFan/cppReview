@@ -2,20 +2,37 @@ cmake_minimum_required(VERSION 3.10)
 project(cppReview)
 
 set(CMAKE_CXX_STANDARD 11)
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -fexec-charset=GBK")
-#set(JSONCPP_DIR /home/ubuntu/software/jsoncpp-0.10.7)
-#set(lib_DIR /usr/lib/x84_64-linux-gnu)# 为了libjsoncpp.a
-#INCLUDE_DIRECTORIES( #相关头文件的目录
-#        ${JSONCPP_DIR}/include
-#        /usr/local/include)
-#
-#LINK_DIRECTORIES( #相关库文件的目录
-#        ${JSONCPP_DIR}/lib
-#
-#        /usr/local/lib
-#
-#        )
-#set(lib_DIR /usr/lib/x84_64-linux-gnu)
+add_definitions(-DUBUNTU=0)
+if(UBUNTU)
+#下面的是ubuntu的
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -fexec-charset=GBK")
+set(JSONCPP_DIR /home/ubuntu/software/jsoncpp-0.10.7)
+set(lib_DIR /usr/lib/x84_64-linux-gnu)# 为了libjsoncpp.a
+set(MYSQL_LIBS mysqlclient)
+INCLUDE_DIRECTORIES( #相关头文件的目录
+        ${JSONCPP_DIR}/include
+        /usr/local/include)
+
+LINK_DIRECTORIES( #相关库文件的目录
+        ${JSONCPP_DIR}/lib
+
+        /usr/local/lib
+
+        )
+set(lib_DIR /usr/lib/x84_64-linux-gnu)#链接库路径
+
+else()
+#下面的是windows的
+INCLUDE_DIRECTORIES(
+        D:/Study/soft_ware/mysql-8.0.16-winx64/Connector C++ 8.0/include
+        C:/Program Files/MySQL/MySQL Server 8.0/include
+)
+LINK_DIRECTORIES(
+        D:/Study/soft_ware/mysql-8.0.16-winx64/Connector C++ 8.0/lib64/vs14
+
+        C:/Program Files/MySQL/MySQL Server 8.0/lib
+)
+endif()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/KnowledgePoint/learningLog)
 #add_executable(cppReview Chapter.cpp)
@@ -33,3 +50,9 @@ add_executable(throwAndDestruct KnowledgePoint/InterestingExp/throwAndDestruct.c
 add_executable(Book_code2_4 KnowledgePoint/learningThread/Book_code2.4.cpp)
 add_executable(move KnowledgePoint/InterestingExp/move.cpp)
 add_executable(Book_code2_9 KnowledgePoint/learningThread/Book_code2.9.cpp)
+add_executable(copy_withThreads tinyProject/copy_withThreads.cpp)
+add_executable(connectMysql tinyProject/connectMysql.cpp)
+add_executable(connectMysqlLogin tinyProject/connectMysqlLogin.cpp)
+target_link_libraries(connectMysql ${MYSQL_LIBS})#ubuntu
+target_link_libraries(connectMysqlLogin ${MYSQL_LIBS})#ubuntu
+

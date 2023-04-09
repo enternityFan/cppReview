@@ -11,7 +11,10 @@ C'est la vie!!! enjoy ur day :D
 #include <vector>
 #include "time.h"
 using namespace std;
+#define MODE 1
 
+
+#if (MODE==0)
 int main() {
     // 做一个实验，来看看move可以提升多少的效率
     // 实验结果表明确实move会加速。差不多40秒左右吧完成实验。
@@ -31,3 +34,32 @@ int main() {
     cout <<"op2 cost:" << float(e2 - s2)/1000<<endl; // 精确到毫秒
     return 0;
 }
+
+#elif (MODE == 1)
+
+
+class test
+{
+public:
+    test()=default;
+    ~test(){
+        cout <<"i am free" << endl;
+    }
+};
+
+test && getTest(){
+    return test();
+}
+int main() {
+
+    // 做一个实验，来看看右值
+    test&& a = getTest();
+    cout <<"here"<<endl;
+
+
+    return 0;
+}
+
+
+
+#endif
