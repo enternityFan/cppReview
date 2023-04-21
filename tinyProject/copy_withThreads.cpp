@@ -111,8 +111,8 @@ void *MyCopy::tfn(void *arg) {
     tfnArg *msg = (tfnArg *)arg;
     long startPos = msg->spos;
     long endPos = msg->epos;
-    cout <<"startPos: " << startPos << endl;
-    cout <<"endPos: " << endPos << endl;
+//    cout <<"startPos: " << startPos << endl;
+//    cout <<"endPos: " << endPos << endl;
 
     std::ifstream source(original_path, std::ios::binary);
     std::ofstream dest(target_path, std::ios::binary | std::ios::in | std::ios::out);
@@ -120,10 +120,11 @@ void *MyCopy::tfn(void *arg) {
     source.seekg(startPos);
     dest.seekp(startPos);
 
-    const std::size_t bufferSize = 4096;
+    const std::size_t bufferSize = 1024 * 4096;
     std::vector<char> buffer(bufferSize);
 
     while (source && source.tellg() < endPos) {
+        //cout <<"i am thread " << this_thread::get_id() <<" ,i m doing "<< source.tellg() << endl;
         source.read(buffer.data(), bufferSize);
         dest.write(buffer.data(), source.gcount());
     }
@@ -134,7 +135,7 @@ void *MyCopy::tfn(void *arg) {
 
 void MyCopy::testcp1() {
     if(isHaveOutput()==false)cout <<"delete output error!\n" << endl;
-    cout <<"Here is the first test, using the most primitive method to realize the copy operation~!" << endl;
+    //cout <<"Here is the first test, using the most primitive method to realize the copy operation~!" << endl;
     cout <<"Copying....." << endl;
     // 获取开始时间
     auto start = std::chrono::high_resolution_clock::now();
@@ -143,8 +144,14 @@ void MyCopy::testcp1() {
     std::ofstream dest(target_path, std::ios::binary );
 
 
-    dest << source.rdbuf();
+    //dest << source.rdbuf();
+    const std::size_t bufferSize = 1024 * 4096;
+    std::vector<char> buffer(bufferSize);
 
+    while (source && source.tellg() < mSize) {
+        source.read(buffer.data(), bufferSize);
+        dest.write(buffer.data(), source.gcount());
+    }
     source.close();
     dest.close();
 
@@ -159,7 +166,7 @@ void MyCopy::testcp1() {
 
 void MyCopy::testcp2() {
     if(isHaveOutput()==false)cout <<"delete output error!\n" << endl;
-    cout <<"Here is the first test, Replication using two threads~!" << endl;
+    //cout <<"Here is the first test, Replication using two threads~!" << endl;
     cout <<"Copying....." << endl;
     createTarget();
     // 获取开始时间
@@ -192,7 +199,7 @@ void MyCopy::testcp2() {
 
 void MyCopy::testcp3(int thread_num) {
     if(isHaveOutput()==false)cout <<"delete output error!\n" << endl;
-    cout <<"Here is the first test, Copy using multithreading~!" << endl;
+    //cout <<"Here is the first test, Copy using multithreading~!" << endl;
     cout <<"Copying....." << endl;
     createTarget();
     // 获取开始时间
@@ -212,7 +219,7 @@ void MyCopy::testcp3(int thread_num) {
         else
             argInfos[i].epos=argInfos[i].spos+partSize;
         threads[i] = thread(&MyCopy::tfn,this,(void *)&argInfos[i]);
-        cout <<"thread " << i << "is working...." << endl;
+        //cout <<"thread " << i << " is working...." << endl;
     }
 
 
