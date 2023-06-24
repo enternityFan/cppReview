@@ -2,6 +2,7 @@
 <project version="4">
   <component name="Encoding" defaultCharsetForPropertiesFiles="GBK">
     <file url="file://$PROJECT_DIR$/1_1global_static_var.cpp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/KnowledgePoint/DesignPattern/Decorator.cpp" charset="GBK" />
     <file url="file://$PROJECT_DIR$/KnowledgePoint/learningLog/main.cpp" charset="GBK" />
     <file url="file://$PROJECT_DIR$/main.cpp" charset="GBK" />
     <file url="file://$PROJECT_DIR$/tinyProject/connectMysql.cpp" charset="GBK" />

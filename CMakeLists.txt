@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 project(cppReview)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 14)
 add_definitions(-DUBUNTU=0)
 if(UBUNTU)
 #下面的是ubuntu的
@@ -45,8 +45,8 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/KnowledgePoint/learningLog)
 #add_executable(learningJson KnowledgePoint/learningJson/learningJson.cpp )
 #target_link_libraries(learningJson jsoncpp)
 add_executable(test_Logger KnowledgePoint/learningLog/test_logger.cpp KnowledgePoint/learningLog/Logger.h KnowledgePoint/learningLog/Logger.cpp)
-add_executable(learnSingle KnowledgePoint/DesignPattern/Singleton.cpp)
-add_executable(Book_code1_1 KnowledgePoint/learningThread/Book_code1.1.cpp)
+
+add_executable(Book_code1_1 KnowledgePoint/learningThread/Book_code1.1.cpp )
 add_executable(throwAndDestruct KnowledgePoint/InterestingExp/throwAndDestruct.cpp)
 add_executable(Book_code2_4 KnowledgePoint/learningThread/Book_code2.4.cpp)
 add_executable(move KnowledgePoint/InterestingExp/move.cpp)
@@ -60,4 +60,37 @@ target_link_libraries(connectMysql ${MYSQL_LIBS})#ubuntu
 target_link_libraries(connectMysqlLogin ${MYSQL_LIBS})#ubuntu
 
 add_executable(test_RALL KnowledgePoint/test_RALL.cpp)
+add_executable(test_template_args test_template_args.cpp)
 add_executable(niuke NiuKe/test_meiju.cpp)
+add_executable(test0427 test0427.cpp)
+# Add subdirectory
+#add_subdirectory(KnowledgePoint/DesignPattern)
+
+
+
+# 设计模式i相关
+add_executable(learnSingle KnowledgePoint/DesignPattern/Singleton.cpp)
+add_executable(learnStrategy KnowledgePoint/DesignPattern/Strategy.cpp)
+add_executable(learnStrategy_Easy_Factory KnowledgePoint/DesignPattern/Strategy_add_EasyFactory.cpp)
+add_executable(learnDecorator KnowledgePoint/DesignPattern/Decorator.cpp)
+add_executable(learnProxy KnowledgePoint/DesignPattern/Proxy.cpp)
+add_executable(TemplateMethod KnowledgePoint/DesignPattern/TemplateMethod.cpp)
+add_executable(Facade KnowledgePoint/DesignPattern/Facade.cpp)
+add_executable(Builder KnowledgePoint/DesignPattern/Builder.cpp)
+add_executable(Observer KnowledgePoint/DesignPattern/Observer.cpp)
+add_executable(State KnowledgePoint/DesignPattern/State.cpp)
+add_executable(Adapter KnowledgePoint/DesignPattern/Adapter.cpp)
+add_executable(Memento KnowledgePoint/DesignPattern/Memento.cpp)
+add_executable(Iterator KnowledgePoint/DesignPattern/Iterator.cpp)
+add_executable(Bridge KnowledgePoint/DesignPattern/Bridge.cpp)
+add_executable(Command KnowledgePoint/DesignPattern/Command.cpp)
+add_executable(ChainOfResponsibility KnowledgePoint/DesignPattern/ChainOfResponsibility.cpp)
+add_executable(Mediator KnowledgePoint/DesignPattern/Mediator.cpp)
+add_executable(Flyweight KnowledgePoint/DesignPattern/Flyweight.cpp)
+add_executable(Visitor KnowledgePoint/DesignPattern/Visitor.cpp)
+
+
+
+
+
+

@@ -9,6 +9,7 @@ C'est la vie!!! enjoy ur day :D
 
 #include<iostream>
 #include <thread>
+#include <condition_variable>
 
 using namespace std;
 
@@ -96,7 +97,7 @@ int main() {
     //testDestructor test;
     //throw -1;
 
-    //system("pause");
+    system("pause");
     return 0;
 }
 
